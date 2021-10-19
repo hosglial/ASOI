@@ -7,8 +7,6 @@
 # равномерный кроссовер; оператор мутации – инверсия.
 
 
-
-
 from random import choices, randint, random
 
 
@@ -16,7 +14,8 @@ def select_rand(data):
     return choices(
         list(range(10)), weights=list(i["weight"] for i in data), k=1)
 
-def breed(first,second):
+
+def breed(first, second):
     fbreed = ""
     sbreed = ""
     for i in range(len(first)):
@@ -28,10 +27,11 @@ def breed(first,second):
             sbreed += first[i]
     return fbreed, sbreed
 
+
 def mutate(item):
-    r1,r2 = randint(0,len(item)), randint(0,len(item))
-    pos1 = min(r1,r2)
-    pos2 = max(r1,r2)
+    r1, r2 = randint(0, len(item)), randint(0, len(item))
+    pos1 = min(r1, r2)
+    pos2 = max(r1, r2)
 
     reversable = item[pos1:pos2]
     newitem = item[:pos1] + reversable[::-1] + item[pos2:]
@@ -67,26 +67,25 @@ indivs = [
     {'feath': '11010001'}
 ]
 for i in indivs:
-    i['weight'] = i["feath"].count("1")/8
+    i['weight'] = i["feath"].count("1") / 8
 print('start_population')
 for i in indivs:
     print(i)
 
 feaths = [i['weight'] for i in indivs]
-avg = sum(feaths)/len(feaths)
+avg = sum(feaths) / len(feaths)
 print(f'avg = {avg}')
 
 pairs = []
 for item in range(0, 8, 2):
-    pairs.append((select_rand(indivs)[0],select_rand(indivs)[0]))
+    pairs.append((select_rand(indivs)[0], select_rand(indivs)[0]))
 
 # pairs = [(7, 9), (4, 9), (5, 8), (4, 6)]
 
 
-
 breeded_d = []
 for i in pairs:
-    breeded_d.append(breed(first=indivs[i[0]]['feath'], second= indivs[i[1]]['feath']))
+    breeded_d.append(breed(first=indivs[i[0]]['feath'], second=indivs[i[1]]['feath']))
 
 print("\nbreeded")
 print(breeded_d)
@@ -96,16 +95,14 @@ for i in breeded_d:
     breeded_m.append(i[0])
     breeded_m.append(i[1])
 
-
 mutated = []
 for i in breeded_m:
-    mutated.append({"feath": mutate(i), "weight": mutate(i).count("1")/8})
+    mutated.append({"feath": mutate(i), "weight": mutate(i).count("1") / 8})
 
 print('\nmutated')
 for i in mutated:
     print(i)
 
 feaths_evolved = [i['weight'] for i in mutated]
-avg_evolved = sum(feaths_evolved)/len(feaths_evolved)
+avg_evolved = sum(feaths_evolved) / len(feaths_evolved)
 print(f'avg_evolved = {avg}')
-
