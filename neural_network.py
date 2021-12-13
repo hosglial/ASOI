@@ -33,7 +33,6 @@ class Neuron:
         return res
 
 
-double_mass = [0, 1]
 data_dict = {
     (0, 0): (1, 0),
     (0, 1): (1, 0),

@@ -35,8 +35,6 @@ def mutate(item):
 
     reversable = item[pos1:pos2]
     newitem = item[:pos1] + reversable[::-1] + item[pos2:]
-    # print(item)
-    # print(newitem)
     return newitem
 
 
